@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alexis's Sweet Treats</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #fff9f5;
+      color: #3b2a2a;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #fff;
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #c0556a;
+      letter-spacing: 1px;
+    }
+    .logo span { color: #e8a0b0; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 34px;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: #3b2a2a;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: #c0556a; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #fce4ec 0%, #fff0f3 50%, #fce4ec 100%);
+      padding: 110px 60px 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🍓';
+      font-size: 120px;
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      opacity: 0.12;
+    }
+    .hero::after {
+      content: '🧁';
+      font-size: 120px;
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      opacity: 0.12;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      color: #c0556a;
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #7a4a55;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .btn {
+      display: inline-block;
+      background: #c0556a;
+      color: #fff;
+      padding: 16px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: background 0.25s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(192,85,106,0.35);
+    }
+    .btn:hover { background: #a8394f; transform: translateY(-2px); }
+
+    /* ── ABOUT ── */
+    .about {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding: 90px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .about-emoji {
+      font-size: 7rem;
+      min-width: 140px;
+      text-align: center;
+    }
+    .about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #c0556a;
+      margin-bottom: 16px;
+    }
+    .about p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #5a3a3a;
+      font-weight: 300;
+    }
+
+    /* ── MENU ── */
+    .menu {
+      background: linear-gradient(180deg, #fff9f5 0%, #fce4ec22 100%);
+      padding: 80px 60px;
+      text-align: center;
+    }
+    .menu h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: #c0556a;
+      margin-bottom: 10px;
+    }
+    .menu .subtitle {
+      color: #9a6070;
+      font-size: 1rem;
+      margin-bottom: 52px;
+      font-weight: 300;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 28px 32px;
+      box-shadow: 0 4px 24px rgba(192,85,106,0.10);
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-align: center;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 36px rgba(192,85,106,0.18);
+    }
+    .card .icon { font-size: 3.2rem; margin-bottom: 16px; }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #c0556a;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.93rem;
+      color: #7a5a60;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .card .price {
+      display: inline-block;
+      margin-top: 18px;
+      background: #fce4ec;
+      color: #c0556a;
+      font-weight: 700;
+      padding: 6px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+    }
+
+    /* ── ORDER / CTA ── */
+    .cta {
+      background: linear-gradient(135deg, #c0556a, #e8a0b0);
+      padding: 80px 60px;
+      text-align: center;
+      color: #fff;
+    }
+    .cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+    }
+    .cta p {
+      font-size: 1.1rem;
+      margin-bottom: 34px;
+      font-weight: 300;
+      opacity: 0.92;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: #c0556a;
+      padding: 16px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 80px 60px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #c0556a;
+      margin-bottom: 12px;
+    }
+    .contact p {
+      color: #7a5a60;
+      font-size: 1rem;
+      margin-bottom: 36px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    form { display: flex; flex-direction: column; gap: 18px; }
+    input, textarea {
+      padding: 14px 20px;
+      border: 2px solid #f0d0d8;
+      border-radius: 12px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.97rem;
+      background: #fff9f5;
+      color: #3b2a2a;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { border-color: #c0556a; }
+    textarea { height: 130px; resize: vertical; }
+    form .btn { border: none; cursor: pointer; width: 100%; font-size: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #3b2a2a;
+      color: #e8c8cc;
+      text-align: center;
+      padding: 36px 60px;
+      font-size: 0.9rem;
+    }
+    footer .heart { color: #e8a0b0; }
+    footer .socials { margin-top: 12px; font-size: 1.6rem; letter-spacing: 8px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      nav ul { gap: 18px; }
+      .hero { padding: 80px 24px 60px; }
+      .hero h1 { font-size: 2.4rem; }
+      .about { flex-direction: column; padding: 60px 24px; text-align: center; }
+      .menu { padding: 60px 24px; }
+      .cta { padding: 60px 24px; }
+      .contact { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Alexis's <span>Sweet Treats</span> 🍓</div>
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#order">Order</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Handmade with Love,<br/>Baked to Perfection 🧁</h1>
+    <p>Custom cakes, cupcakes, cookies, and sweet creations — made fresh for every occasion in Muhlenberg, PA.</p>
+    <a href="#menu" class="btn">See Our Treats</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-emoji">🍰</div>
+    <div>
+      <h2>Hi, I'm Alexis!</h2>
+      <p>
+        Welcome to Alexis's Sweet Treats — a home bakery rooted in passion, creativity, and a whole lot of sugar. 
+        Every treat is handcrafted from scratch using quality ingredients and lots of love. Whether you're celebrating 
+        a birthday, a wedding, or just a Tuesday, I'm here to make it sweeter. Based in Muhlenberg, PA — available 
+        for local pickup and custom orders.
+      </p>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <h2>Our Sweet Menu</h2>
+    <p class="subtitle">Everything baked fresh to order — just for you ✨</p>
+    <div class="menu-grid">
+      <div class="card">
+        <div class="icon">🎂</div>
+        <h3>Custom Cakes</h3>
+        <p>Fully personalized celebration cakes in any flavor, size, and design. Made to match your vision.</p>
+        <span class="price">Starting at $45</span>
+      </div>
+      <div class="card">
+        <div class="icon">🧁</div>
+        <h3>Cupcakes</h3>
+        <p>Moist, fluffy cupcakes topped with swirls of buttercream. Perfect for parties and events.</p>
+        <span class="price">$3.50 each / $36 dozen</span>
+      </div>
+      <div class="card">
+        <div class="icon">🍪</div>
+        <h3>Decorated Cookies</h3>
+        <p>Hand-decorated sugar cookies for any occasion — holidays, birthdays, showers & more.</p>
+        <span class="price">$4 each / $40 dozen</span>
+      </div>
+      <div class="card">
+        <div class="icon">🍫</div>
+        <h3>Brownies & Bars</h3>
+        <p>Fudgy chocolate brownies, lemon bars, and seasonal treat bars made from scratch.</p>
+        <span class="price">$28 per dozen</span>
+      </div>
+      <div class="card">
+        <div class="icon">🍓</div>
+        <h3>Strawberry Shortcake</h3>
+        <p>Fresh strawberry shortcake made with real whipped cream and seasonal strawberries.</p>
+        <span class="price">Starting at $30</span>
+      </div>
+      <div class="card">
+        <div class="icon">🎁</div>
+        <h3>Treat Boxes</h3>
+        <p>Curated gift boxes filled with an assortment of our best treats — perfect for gifting.</p>
+        <span class="price">Starting at $25</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / ORDER -->
+  <section class="cta" id="order">
+    <h2>Ready to Place a Custom Order?</h2>
+    <p>All orders are made fresh! Please allow 3–5 days notice for custom orders. Available for local pickup in Muhlenberg, PA.</p>
+    <a href="#contact" class="btn-white">Order Now 🍰</a>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Get in Touch</h2>
+    <p>Have a special request or question? Fill out the form below and I'll get back to you within 24 hours!</p>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <input type="text" placeholder="Event Date (if applicable)" />
+      <textarea placeholder="Tell me about your order — flavor, design ideas, quantity, occasion..."></textarea>
+      <button type="submit" class="btn">Send My Order Request 🍓</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>Made with <span class="heart">❤️</span> by Alexis · Muhlenberg, PA</div>
+    <div>© 2026 Alexis's Sweet Treats · All rights reserved</div>
+    <div class="socials">🍓🧁🎂</div>
+  </footer>
+
+</body>
+</html>
